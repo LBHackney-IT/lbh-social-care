@@ -1,6 +1,11 @@
 import { AuthRoles } from '../support/commands';
 
 describe('Viewing a created warning note', () => {
+  it('has no detectable accessibility problems', () => {
+    cy.injectAxe();
+    cy.checkA11y();
+  });
+
   describe('As a user in the Adults group', () => {
     it('should show the details of the warning note if the records are not restricted', () => {
       cy.visitAs(

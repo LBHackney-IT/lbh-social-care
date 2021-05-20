@@ -1,6 +1,11 @@
 import { AuthRoles } from '../support/commands';
 
 describe('Adding records', () => {
+  it('has no detectable accessibility problems', () => {
+    cy.injectAxe();
+    cy.checkA11y();
+  });
+
   describe('As a user in the Adults group', () => {
     it('should go to the add case note form when "Case Note Recording" is selected', () => {
       cy.visitAs(

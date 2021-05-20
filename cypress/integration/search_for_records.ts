@@ -1,6 +1,11 @@
 import { AuthRoles } from '../support/commands';
 
 describe('Search for records by person', () => {
+  it('has no detectable accessibility problems', () => {
+    cy.injectAxe();
+    cy.checkA11y();
+  });
+
   describe('As a user in the Admin Dev group', () => {
     it('Search of Adult group record', () => {
       cy.visitAs('/cases', AuthRoles.AdminDevGroup);

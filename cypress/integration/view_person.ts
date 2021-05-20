@@ -1,6 +1,11 @@
 import { AuthRoles } from '../support/commands';
 
 describe('Viewing a resident', () => {
+  it('has no detectable accessibility problems', () => {
+    cy.injectAxe();
+    cy.checkA11y();
+  });
+
   describe('As a user in the Childrens group', () => {
     it('should show the records as restricted when the current user does not have access to them because they are in the wrong user group', () => {
       cy.visitAs(

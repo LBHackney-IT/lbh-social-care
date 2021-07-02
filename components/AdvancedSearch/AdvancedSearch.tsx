@@ -52,13 +52,15 @@ const hasInitialQueryFromUrl = (
 export const useSearch = <T extends object>({
   fields,
   hit: HitRenderer,
-  resultsWrapper: ResultsWrapper,
+  resultsWrapper: ResultsWrapper = ({ children }) => <>{children}</>,
+  noResults: NoResults = () => <div>No records match your query</div>,
   dataSource: useDataSource,
   dataResponseKey,
 }: {
   fields: Field[];
   hit: React.FC<{ hit: T }>;
   resultsWrapper: React.FC;
+  noResults: React.FC;
   dataSource: SWRSearchHook;
   dataResponseKey: string;
 }): {
@@ -142,8 +144,12 @@ export const useSearch = <T extends object>({
         return <div>Searching...</div>;
       }
 
-      if (!data) {
-        return <div>No records match your query</div>;
+      if (
+        !data ||
+        data.length === 0 ||
+        (data[0][dataResponseKey] as T[]).length === 0
+      ) {
+        return <NoResults />;
       }
 
       return (

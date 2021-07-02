@@ -55,28 +55,59 @@ const ResultEntry: HitRenderer<LegacyResident> = ({ hit }) => {
 };
 
 const ResultsWrapper: React.FC = ({ children }) => (
-  <table className="govuk-table lbh-table" data-testid="residents-table">
-    <thead className="govuk-table__head">
-      <tr className="govuk-table__row">
-        <th scope="col" className="govuk-table__header">
-          Social care ID
-        </th>
-        <th scope="col" className="govuk-table__header">
-          Person
-        </th>
-        <th scope="col" className="govuk-table__header">
-          Date of birth
-        </th>
-        <th scope="col" className="govuk-table__header">
-          Postcode
-        </th>
-        <th scope="col" className="govuk-table__header" />
-      </tr>
-    </thead>
+  <>
+    <table className="govuk-table lbh-table" data-testid="residents-table">
+      <thead className="govuk-table__head">
+        <tr className="govuk-table__row">
+          <th scope="col" className="govuk-table__header">
+            Social care ID
+          </th>
+          <th scope="col" className="govuk-table__header">
+            Person
+          </th>
+          <th scope="col" className="govuk-table__header">
+            Date of birth
+          </th>
+          <th scope="col" className="govuk-table__header">
+            Postcode
+          </th>
+          <th scope="col" className="govuk-table__header" />
+        </tr>
+      </thead>
 
-    <tbody className="govuk-table__body">{children}</tbody>
-  </table>
+      <tbody className="govuk-table__body">{children}</tbody>
+    </table>
+  </>
 );
+
+const NoResults = () => {
+  return (
+    <div className={styles.mutedPanel}>
+      <div
+        className={cx(
+          'govuk-warning-text lbh-warning-text',
+          styles.warningText
+        )}
+      >
+        <span
+          className={cx('govuk-warning-text__icon', styles.icon)}
+          aria-hidden="true"
+        >
+          !
+        </span>
+        <strong className={cx('govuk-warning-text__text', styles.text)}>
+          <h2>Prevent duplicate people</h2>
+          <p>Before adding a new person, try:</p>
+          <ul className="lbh-list lbh-list--bullet">
+            <li>alternate spellings or variations of the same name</li>
+            <li>different combinations of names, date of birth or postcode</li>
+            <li>using just the first part of the postcode</li>
+          </ul>
+        </strong>
+      </div>
+    </div>
+  );
+};
 
 export const AdvancedResdentSearch: React.FC = () => {
   const { Search } = useSearch<LegacyResident>({
@@ -104,6 +135,7 @@ export const AdvancedResdentSearch: React.FC = () => {
     ],
     hit: ResultEntry,
     resultsWrapper: ResultsWrapper,
+    noResults: NoResults,
     dataSource: useResidents,
     dataResponseKey: 'residents',
   });

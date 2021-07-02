@@ -16,6 +16,7 @@ import 'stylesheets/all.scss';
 import 'stylesheets/header.scss';
 import { FeatureFlagProvider } from '../lib/feature-flags/feature-flags';
 import { getFeatureFlags } from 'features';
+import { useRouter } from 'next/router';
 
 interface Props {
   user?: Partial<User>;
@@ -33,8 +34,10 @@ const CustomApp = ({
   pageProps,
 }: ExtendedAppProps): JSX.Element | null => {
   const [user] = useState(pageProps.user);
+  const { query } = useRouter();
   const features = getFeatureFlags({
     environmentName: pageProps.environmentName,
+    query,
   });
 
   return (

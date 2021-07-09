@@ -12,6 +12,12 @@ export const startSchema = Yup.object().shape({
   formId: Yup.string().required('Please choose a form'),
 });
 
+export const addRelationshipSchema = Yup.object().shape({
+  relationshipType: Yup.string().required('Please provide a relationship type'),
+  context: Yup.string().required('Enter some context'),
+  additionalOptions: Yup.array().of(Yup.string()),
+});
+
 const getErrorMessage = (field: Field) => {
   if (field.error) return field.error;
   if (field.type === `timetable`) return `Total hours must be more than zero`;

@@ -32,7 +32,7 @@ const PersonDetails = ({
 }: Props): React.ReactElement => {
   const [expandDetails, setExpandDetails] = useState(false);
   return (
-    <div>
+    <div className="govuk-!-margin-bottom-5">
       <div className="lbh-table-header">
         <h2 className="govuk-fieldset__legend--m govuk-custom-text-color">
           {expandView ? `${firstName} ${lastName}` : 'PERSON DETAILS'}

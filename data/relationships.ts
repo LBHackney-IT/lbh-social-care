@@ -1,5 +1,9 @@
 export default [
-  { value: 'parent', text: 'Parent' },
+  {
+    value: 'parent',
+    text: 'Parent',
+    additionalOptions: ['Is a main carer', 'Parent of unborn child'],
+  },
   { value: 'child', text: 'Child' },
   { value: 'other', text: 'Other' },
   { value: 'greatGrandchild', text: 'Great Grandchild' },

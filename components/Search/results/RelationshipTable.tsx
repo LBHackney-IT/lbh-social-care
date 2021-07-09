@@ -15,7 +15,7 @@ const ResultEntry = ({
       <tr className={cx('govuk-table__row')}>
         <td className="govuk-table__cell">
           <input
-            aria-labelledby={`person_${mosaicId}`}
+            id={mosaicId}
             name="personId"
             type="radio"
             value={mosaicId}
@@ -26,7 +26,9 @@ const ResultEntry = ({
         </td>
         <td className="govuk-table__cell">{mosaicId}</td>
         <td className="govuk-table__cell">
-          {firstName} {lastName}
+          <label htmlFor={mosaicId}>
+            {firstName} {lastName}
+          </label>
         </td>
         <td className="govuk-table__cell">
           <span>{(address && address.postcode) || ''}</span>

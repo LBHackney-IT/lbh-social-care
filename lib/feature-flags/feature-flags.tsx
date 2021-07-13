@@ -8,8 +8,9 @@ export type FeatureSet = {
   };
 };
 
-const FeatureFlagContext =
-  React.createContext<FeatureSet | undefined>(undefined);
+const FeatureFlagContext = React.createContext<FeatureSet | undefined>(
+  undefined
+);
 
 export const FeatureFlagProvider: React.FC<{
   features: FeatureSet;
@@ -78,7 +79,12 @@ export const isFeatureFlagActive = (featureName: string) => {
     ? 'development'
     : 'production';
 
-  const features = getFeatureFlags({ environmentName });
+  const features = getFeatureFlags({
+    environmentName,
+    query: {
+      // @TODO this should actual have some value...
+    },
+  });
 
   return isFeatureActive(features)(featureName);
 };

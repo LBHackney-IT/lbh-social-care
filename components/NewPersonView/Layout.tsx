@@ -9,9 +9,10 @@ import { useAllocatedWorkers } from 'utils/api/allocatedWorkers';
 import React from 'react';
 import WarningNotes from 'components/WarningNote/WarningNotes';
 import { useAuth } from 'components/UserContext/UserContext';
-import { canManageCases } from 'lib/permissions';
+import { canManageCases, canUserEditPerson } from 'lib/permissions';
 import AddFormDialog from 'components/AddFormDialog/AddFormDialog';
 import { useState } from 'react';
+import Banner from 'components/FlexibleForms/Banner';
 
 interface NavLinkProps {
   href: string;
@@ -113,6 +114,15 @@ const Layout = ({ person, children }: Props): React.ReactElement => {
       />
 
       <WarningNotes id={person.id} />
+
+      {person.restricted === 'Y' && !canManageCases(user, person) && (
+        <Banner
+          title="This person is restricted"
+          className="lbh-page-announcement--info"
+        >
+          Only administrators can see this person&apos;s case history.
+        </Banner>
+      )}
 
       <div
         className={`govuk-grid-row govuk-!-margin-bottom-8 ${s.personHeader}`}

@@ -49,7 +49,12 @@ const PersonTimeline = ({
     events?.filter((event) =>
       filter === 'case-note' ? isMajorEvent(event) : true
     ),
-    ['formName', 'officerEmail']
+    [
+      'formName',
+      'officerEmail',
+      'caseFormData.case_note_title',
+      'caseFormData.case_note_description',
+    ]
   );
 
   const oldestResult = results?.[results.length - 1];

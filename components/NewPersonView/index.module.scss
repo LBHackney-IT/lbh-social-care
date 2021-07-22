@@ -94,3 +94,14 @@
     border-left: 3px dashed lbh-colour('lbh-text');
   }
 }
+
+.eventLink {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.snippet {
+  color: lbh-colour('lbh-secondary-text');
+}

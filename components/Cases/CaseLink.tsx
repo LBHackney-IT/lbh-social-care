@@ -21,10 +21,10 @@ const getWarningNoteDetailsPageName = (form_name: string) => {
   }
 };
 
-const getLink = (
+export const getLink = (
   recordId: string,
   { form_name_overall, ...caseFormData }: CaseFormData
-) => {
+): string | null => {
   const fileName = (form as Record<string, unknown>)[form_name_overall]
     ? form_name_overall
     : null;

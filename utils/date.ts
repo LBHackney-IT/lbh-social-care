@@ -73,6 +73,9 @@ export const normaliseDateToISO = (str: string): string => {
     return `${year}-${month}-${days}T${hours.padStart(2, '0')}:${minutes}${
       seconds ? `:${seconds}` : ''
     }`;
+  } else if (/[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}/.test(str)) {
+    const [days, month, year] = str.trim().split('/');
+    return `${year}-${month}-${days}`;
   } else {
     return str;
   }

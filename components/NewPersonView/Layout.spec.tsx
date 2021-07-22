@@ -1,7 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { AuthProvider } from 'components/UserContext/UserContext';
 import { mockedResident } from 'factories/residents';
-import { mockedOnlyChildUser, mockedUser } from 'factories/users';
+import {
+  mockedOnlyChildUser,
+  mockedUser,
+  mockedOnlyAdultUser,
+} from 'factories/users';
 import * as relationshipsAPI from 'utils/api/relationships';
 import Layout from './Layout';
 import 'next/router';
@@ -114,5 +118,21 @@ describe('Layout', () => {
       </AuthProvider>
     );
     expect(screen.queryByText('Timeline')).toBe(null);
+  });
+
+  it('tells unauthorised users when a resident is restricted', () => {
+    render(
+      <AuthProvider user={mockedOnlyAdultUser}>
+        <Layout
+          person={{
+            ...mockedResident,
+            restricted: 'Y',
+          }}
+        >
+          Foo
+        </Layout>
+      </AuthProvider>
+    );
+    expect(screen.getByText('This person is restricted'));
   });
 });
